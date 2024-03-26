@@ -1,6 +1,7 @@
 package com.spring.mvc.chap04.jdbc;
 
 import com.spring.mvc.chap04.entity.Person;
+import com.spring.mvc.chap04.jdbc.JdbcRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
