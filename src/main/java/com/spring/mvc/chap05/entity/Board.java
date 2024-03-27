@@ -11,6 +11,7 @@ CREATE TABLE tbl_board (
 );
  */
 
+import com.spring.mvc.chap05.dto.request.BoardRequestDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -27,5 +28,12 @@ public class Board {
     private int viewCount; // 조회수
     private LocalDateTime regDate; // 작성일자시간
     private String writer; // 작성자
+
+    public Board(BoardRequestDTO dto) {
+        this.writer = dto.getWriter();
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
+//        this.regDate = LocalDateTime.now();
+    }
 
 }
