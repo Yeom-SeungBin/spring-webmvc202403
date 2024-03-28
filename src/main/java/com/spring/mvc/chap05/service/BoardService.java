@@ -41,4 +41,8 @@ public class BoardService {
         return new BoardDetailResponseDTO(board);
     }
 
+    public void delete(int bno) {
+        repository.delete(bno);
+    }
+
 }
