@@ -1,6 +1,7 @@
 package com.spring.mvc.chap05.api;
 
 import com.spring.mvc.chap05.common.Page;
+import com.spring.mvc.chap05.dto.request.ReplyModifyRequestDTO;
 import com.spring.mvc.chap05.dto.request.ReplyPostRequestDTO;
 import com.spring.mvc.chap05.dto.response.ReplyDetailResponseDTO;
 import com.spring.mvc.chap05.dto.response.ReplyListResponseDTO;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 
 @RestController // @Controller + 메서드마다 @ResponseBody를 붙인 것과 동일한 효과.
-@RequestMapping("/api/vi/replies")
+@RequestMapping("/api/v1/replies")
 @RequiredArgsConstructor
 public class ReplyApiController {
 
@@ -74,6 +75,24 @@ public class ReplyApiController {
         replyService.register(dto);
 
         return ResponseEntity.ok().body("success");
+
+    }
+
+    @PutMapping
+    public ResponseEntity<?> update(@Validated @RequestBody ReplyModifyRequestDTO dto,
+                                    BindingResult result) {
+
+        if(result.hasErrors()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(result.toString());
+        }
+
+        System.out.println("/api/v1/replies : PUT");
+        System.out.println("dto = " + dto);
+
+        replyService.modify(dto);
+        return ResponseEntity.ok().body("modSuccess");
 
     }
 
