@@ -36,7 +36,7 @@ public class RestController {
     }
 
     @PostMapping("/object2")
-    ResponseBody
+    @ResponseBody
     public Person object2(@RequestBody Person p) {
         System.out.println("fetch 요청이 들어옴!");
         System.out.println("p = " + p);

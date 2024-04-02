@@ -1,7 +1,9 @@
 package com.spring.mvc.chap05.api;
 
+import com.spring.mvc.chap05.common.Page;
 import com.spring.mvc.chap05.dto.request.ReplyPostRequestDTO;
 import com.spring.mvc.chap05.dto.response.ReplyDetailResponseDTO;
+import com.spring.mvc.chap05.dto.response.ReplyListResponseDTO;
 import com.spring.mvc.chap05.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ import java.util.List;
  * => /replies/3    :   DELETE    (O)
  */
 
-@Controller
+@RestController // @Controller + 메서드마다 @ResponseBody를 붙인 것과 동일한 효과.
 @RequestMapping("/api/vi/replies")
 @RequiredArgsConstructor
 public class ReplyApiController {
@@ -35,14 +37,20 @@ public class ReplyApiController {
     private final ReplyService replyService;
 
     // 댓글 목록 조회 요청
-    // URL : /api/v1/replies/글번호
-    @GetMapping("/{boardNo}")
-    public ResponseEntity<?> list(@PathVariable int boardNo) {
+    // URL : /api/v1/replies/글번호/page/페이지번호
+    @GetMapping("/{boardNo}/page/{pageNo}")
+//    @ResponseBody
+    public ResponseEntity<?> list(@PathVariable int boardNo, @PathVariable int pageNo) {
         System.out.println("/api/v1/replies/" + boardNo + " : GET!");
+        System.out.println("pageNo = " + pageNo);
 
-        List<ReplyDetailResponseDTO> dtoList = replyService.getList(boardNo);
+        Page page = new Page();
+        page.setPageNo(pageNo);
+        page.setAmount(5);
 
-        return ResponseEntity.ok().body(dtoList);
+        ReplyListResponseDTO replies = replyService.getList(boardNo, page);
+
+        return ResponseEntity.ok().body(replies);
     }
 
     // RequestParam: 동기요청에서 ?뒤에 붙은 파라미터
