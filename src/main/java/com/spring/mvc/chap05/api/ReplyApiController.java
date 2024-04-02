@@ -66,7 +66,7 @@ public class ReplyApiController {
             // 한 번에 객체로 포장해서 리턴할 수 있게 하는 Spring에서 제공하는 객체.
 
             return ResponseEntity.badRequest()
-                                .body(result.toString());
+                    .body(result.toString());
         }
 
         System.out.println("/api/v1/replies : POST");
@@ -82,7 +82,7 @@ public class ReplyApiController {
     public ResponseEntity<?> update(@Validated @RequestBody ReplyModifyRequestDTO dto,
                                     BindingResult result) {
 
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return ResponseEntity
                     .badRequest()
                     .body(result.toString());
@@ -94,6 +94,28 @@ public class ReplyApiController {
         replyService.modify(dto);
         return ResponseEntity.ok().body("modSuccess");
 
+    }
+
+    @DeleteMapping("/{replyNo}")
+    public ResponseEntity<?> remove(@PathVariable Integer replyNo) {
+        if (replyNo == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("댓글 번호가 전달되지 않음!");
+        }
+
+        System.out.println("/api/v1/replies/ " + replyNo + " : DELETE");
+
+        try {
+            replyService.delete(replyNo);
+            return ResponseEntity
+                    .ok()
+                    .body("delSuccess");
+        } catch (Exception e) {
+            return ResponseEntity
+                    .internalServerError()
+                    .body(e.getMessage());
+        }
     }
 
 }
