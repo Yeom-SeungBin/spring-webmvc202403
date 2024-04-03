@@ -54,4 +54,8 @@ public class MemberService {
 
         }
 
+    public boolean checkDuplicateValue(String type, String keyword) {
+        return memberMapper.isDuplicate(type, keyword);
+    }
+
 }
