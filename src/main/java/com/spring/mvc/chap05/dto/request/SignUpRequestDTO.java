@@ -8,8 +8,6 @@ import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Savepoint;
-
 @Getter @Setter @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
