@@ -22,7 +22,7 @@ public class LocalResourceConfig implements WebMvcConfigurer {
         */
         registry
                 .addResourceHandler("/local/**")
-                .addResourceLocations("file : " + rootPath);
+                .addResourceLocations("file:" + rootPath);
 
     }
 

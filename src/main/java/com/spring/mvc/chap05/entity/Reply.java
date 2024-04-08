@@ -18,7 +18,7 @@ ALTER TABLE tbl_reply
 ADD account VARCHAR(50);
 
 ALTER TABLE tbl_reply
-ADD CONSTRAINT fk_reply_accout
+ADD CONSTRAINT fk_reply_account
 FOREIGN KEY (account)
 REFERENCES tbl_member (account)
 ON DELETE CASCADE;
@@ -45,5 +45,7 @@ public class Reply {
     private LocalDateTime updateDate;
     @Setter
     private String account;
+
+    private String profileImage;
 
 }
